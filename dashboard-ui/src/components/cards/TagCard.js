@@ -5,7 +5,7 @@ function TagCard(props) {
     const {tags} = props;
     return (
         <div className={classes.tagContainer}>
-            {tags.map((tag)=><span className={classes.tag}>{tag}</span>)}
+            {tags.map((tag)=><span key={tag} className={classes.tag}>{tag}</span>)}
         </div>
     );
 }

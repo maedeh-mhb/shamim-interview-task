@@ -8,10 +8,10 @@ import { makeStyles } from 'tss-react/mui';
 import adduser from '../../assets/icons/adduser.svg';
 import chats from '../../assets/icons/chats.svg';
 import dashboard from '../../assets/icons/dashboard.svg';
+import gallery from '../../assets/icons/gallery.svg';
 import invitation from '../../assets/icons/invitation.svg';
 import invoice from '../../assets/icons/invoice.svg';
 import profile from '../../assets/icons/profile.svg';
-import gallery from '../../assets/icons/gallery.svg';
 
 const useStyles= makeStyles()(theme=>({
 
@@ -23,6 +23,12 @@ const useStyles= makeStyles()(theme=>({
     listItem:{
         ...theme.overrides.MuiListItem ,
     },
+    icon:{
+      width:'0.3rem',
+      position:'relative',
+      top:'120%',
+      right:'100%'
+    }
 
   }))
 
@@ -33,7 +39,7 @@ function NavigationBar(props) {
     const navigate= useNavigate();
     const [value,setValue] = useState(0)
     const [iseOpen, setOpen] = useState({
-        right: true,
+        right: props.open,
       });
     
       useEffect(()=>{
@@ -76,7 +82,7 @@ function NavigationBar(props) {
         {
             text:'گفتگو ها ',
             param:'/chats',
-            img: chats
+            img: chats,
         },
         {
             text:'ارسال دعوت نامه',
@@ -120,6 +126,7 @@ function NavigationBar(props) {
           className={classes.box}
           sx={{ width: 250 }}
           role="presentation"
+          overflow={'hidden'}
         >
           <Tabs value={value} orientation="vertical"
             TabIndicatorProps={{
@@ -128,6 +135,7 @@ function NavigationBar(props) {
              onChange={handleChange}>
             {listItems.map((item, index) => (
               <LinkTab 
+              key={item.text}
               label={item.text} 
               onClick={()=>navigate(item.param)}
               icon={<img src={item.img}/>} 
@@ -139,10 +147,9 @@ function NavigationBar(props) {
       );
     
     return (
-        <div>
-
+          <>
           <Drawer
-           variant="persistent"
+           variant="permanent"
             elevation={0}
             anchor={'right'}
             open={iseOpen['right']}
@@ -150,8 +157,9 @@ function NavigationBar(props) {
           >
             {list('right')}
           </Drawer>
+            
+          </>
 
-    </div>
     );
 }
 

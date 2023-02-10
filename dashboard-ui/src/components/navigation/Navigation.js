@@ -1,4 +1,4 @@
-import {Route,Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Chats from '../../pages/Chats';
 import Gallery from '../../pages/Gallery';
 import HomPage from '../../pages/HomPage';

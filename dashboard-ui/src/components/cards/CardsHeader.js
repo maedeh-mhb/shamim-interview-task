@@ -12,30 +12,28 @@ const useStyles= makeStyles()(theme=>({
         marginRight:'5%',
     },
     img:{
-        width:'1.5rem',
+        width:theme.icons.iconSize_100,
         cursor:'pointer !important',
-        zIndex:'12'
+        zIndex:'12',
+        marginLeft:'0'
     },
     container: {
         width:'100%',
-        display:'flex',
-        justifyContent:'space-between',
+        display:'grid',
         alignItems:'center',
-        width:'100%',
-       
+        gridTemplateColumns: '2fr 3fr 1fr',
       },
 
       devider: {
-        width:'70%',
-        marginRight:'3%',
-        height:'0.10em',
+        flexBasis: '50%',
+        height:'0.5px',
         backgroundColor:theme.typography.light_grey200
       },
       innerContainer: {
-        width:'60%',
+        width:'100%',
         display:'flex',
         alignItems:'center',
-        justifyContent:'space-between'
+        justifyContent:'flex-end'
       }
   }))
 
@@ -50,11 +48,9 @@ function CardsHeader(props) {
                 <p className={classes.title}>
                   {title}
                 </p>
-                <div className={classes.innerContainer}>
                 <span className={classes.devider}></span>
                 <img src={edit} className={classes.img}/>
-                </div>
-                
+  
             </div>
         </Box>
     );

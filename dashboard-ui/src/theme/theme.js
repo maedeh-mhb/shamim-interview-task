@@ -7,7 +7,9 @@ import { faIR } from '@mui/material/locale';
  const lightGrey='rgb(212,218,232)';
  const grey='rgb(125,135,162)';
  const transBlue='rgb(243,246,255)';
- const iconSize_100= '1.5rem';
+ const iconSize_100= '1.3rem';
+ const font_size100='0.75rem';
+ const font_size200='0.85rem';
 
 // applying global styles
 export default createTheme({
@@ -24,11 +26,15 @@ export default createTheme({
         light_grey200:grey,
         selected:transBlue,
         fontFamily: "IRANYekan",
-        font_size100:'0.75rem',
-        font_size200:'0.85rem',
+        font_size100:font_size100,
+        font_size200:font_size200,
     },
     icons: {
-        iconSize_100: iconSize_100
+        iconSize_100: iconSize_100,
+    },
+    h1 :{
+        fontSize:font_size200,
+        color:darkBlue,   
     },
     overrides :{
         MuiListItem:{
@@ -48,6 +54,9 @@ export default createTheme({
             marginLeft:'0.9rem'
         }
         },
+    },
+    effects:{
+         boxShadow: '0px 10px 15px -11px rgba(0,0,0,0.1)',
     },
     faIR
 })

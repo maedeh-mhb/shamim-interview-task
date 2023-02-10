@@ -7,7 +7,7 @@ function OptionCard(props) {
     return (
         <ul className={classes.list}>
             {options.map((option)=>(
-                <li>{option}</li>
+                <li key={option}>{option}</li>
             ))}
         </ul>
     );

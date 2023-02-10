@@ -3,8 +3,10 @@ import Avatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
+import Slide from '@mui/material/Slide';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
@@ -12,14 +14,14 @@ import logo from '../../assets/icons/logo.svg';
 import logout from '../../assets/icons/logout.svg';
 import notif from '../../assets/icons/notif.svg';
 import setting from '../../assets/icons/setting.svg';
+import switchIcon from '../../assets/icons/switch.svg';
 import { convertNumberToLetter } from '../../utils/ArabicConvert';
-
 
 
  const useStyles= makeStyles()(theme=>({
    appBar:{
      backgroundColor:'white',
-     boxShadow: '0px 10px 15px -11px rgba(0,0,0,0.1)',
+     boxShadow: theme.effects.boxShadow,
      padding:'15px'
     },
     toolBar: {
@@ -44,7 +46,24 @@ import { convertNumberToLetter } from '../../utils/ArabicConvert';
     margin:'0'
    },
 
- }))
+ }));
+
+ 
+function HideOnScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+  });
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
 
 function SettingBar(props) {
    const {classes} = useStyles();
@@ -57,6 +76,7 @@ function SettingBar(props) {
    },[])
 
   return (
+    <HideOnScroll {...props}>
     <AppBar  className={classes.appBar} position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar  className={classes.toolBar}>
         <Box sx={{ flexGrow: 0 }}>
@@ -91,6 +111,15 @@ function SettingBar(props) {
             <img src={logout} className={classes.icon}/>
           </IconButton>
         </Tooltip>
+        <Tooltip title="تغییر تم" >
+          <IconButton size="large"
+          className={classes.button}
+           color="inherit"
+           aria-label="switch icon"
+           sx={{ mr: 2 }}>
+                 <img src={switchIcon} className={classes.icon} style={{border:'none'}}/>
+          </IconButton>
+        </Tooltip>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="خانه">
@@ -101,6 +130,8 @@ function SettingBar(props) {
           </Box>
         </Toolbar>
     </AppBar>
+
+    </HideOnScroll>
   );
 }
 

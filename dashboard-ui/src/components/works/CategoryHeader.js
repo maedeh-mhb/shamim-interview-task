@@ -1,13 +1,9 @@
-import Box from '@mui/material/Box';
+import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { makeStyles } from 'tss-react/mui';
 import deleteIcon from '../../assets/icons/delete.svg';
 import edit from '../../assets/icons/edit.svg';
-import plus from '../../assets/icons/plus.svg';
-import theme from '../../theme/theme';
-import CategoryCard from './CategoryCard';
-import CategoryHeader from './CategoryHeader';
 
 const useStyles= makeStyles()(theme=>({
     box:{
@@ -53,30 +49,29 @@ const useStyles= makeStyles()(theme=>({
   }));
 
 
-function Categories(props) {
-    const {classes} = useStyles();
-    const {title,subCategory,onAdd}=props;
-    
-    return (
-        <Box className={classes.box}>
-            <CategoryHeader title={title} />
-            <div style={{display:'flex', gap:'10px', flexWrap:'wrap'}}>
-             {
-                subCategory?.map((item,indx)=>(
-                    <CategoryCard key={`${item.subTitle}-${Math.random()}`} title={item.subTitle} imgUrl={item.imgUrl}/>
-                ))
-             }
-             <div className={classes.more}>
-                <span style={{display:'flex',flexDirection:'column',alignItems:'center',cursor:'pointer'}}>
-                <img src={plus} className={classes.icon} onClick={()=>onAdd(title)} />
-                <span >افزودن اثر</span>
-                </span>
-                <span style={{marginTop:'110%',textAlign:'center',color:`${theme.typography.light_grey200}`,cursor:'pointer'}}>نمایش <br/>بیشتر...</span>
-             </div>
-            </div>
 
-        </Box>
+function CategoryHeader(props) {
+    const {title}=props;
+    const {classes} = useStyles();
+    return (
+        <div className={classes.header}>
+        <h1 className={classes.title}>
+           {title}
+        </h1>
+        <div className={classes.icons}>
+        <Tooltip title="ویرایش">
+             <IconButton>
+                <img src={edit} className={classes.img}/>
+             </IconButton>
+        </Tooltip>
+        <Tooltip title="حذف">
+             <IconButton>
+                <img src={deleteIcon} className={classes.img}/>
+             </IconButton>
+        </Tooltip>
+        </div>
+        </div>
     );
 }
 
-export default Categories;
+export default CategoryHeader;
